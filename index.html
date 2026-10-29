@@ -700,6 +700,304 @@ img.mini{
 
 
 /* ╔══════════════════════════════════╗
+   ║  13b. PREMIUM CARD DESIGN        ║
+   ╚══════════════════════════════════╝ */
+/* Sizes are expressed in --u (1% of card height) so the design scales with the grid.
+   Type colors (--t1, --t2 and their tints) are set inline per card by renderPremiumCard. */
+.card.premium{
+  --u: calc(var(--card-h) / 100);
+  padding: calc(var(--u) * 1.3);
+  border: none;
+  border-radius: calc(var(--u) * 3);
+  background: linear-gradient(145deg, var(--t1-light) 0%, var(--t1) 34%, var(--t2) 72%, var(--t1-deep) 100%);
+  box-shadow: 0 calc(var(--u) * 1) calc(var(--u) * 3) rgba(0,0,0,0.18);
+  font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+}
+.card.premium.rare{
+  background: linear-gradient(145deg, #fff6d5 0%, #e8c25a 28%, #fff0b3 52%, #c9952f 78%, #fbe7a1 100%);
+}
+.pc-body{
+  flex: 1 1 auto;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 1.1);
+  padding: calc(var(--u) * 1.8) calc(var(--u) * 1.8) calc(var(--u) * 1.3);
+  border-radius: calc(var(--u) * 2);
+  background: linear-gradient(180deg, var(--card-box-bg) 0%, var(--card-box-bg) 55%, var(--t1-wash) 100%);
+  color: var(--card-box-ink);
+}
+
+/* --- Head --- */
+.pc-head{
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1.2);
+  flex: 0 0 auto;
+}
+.pc-titles{ flex: 1 1 auto; min-width: 0; }
+.pc-name{
+  font-weight: 700;
+  font-size: calc(var(--u) * 4.4);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pc-genus{
+  margin-top: calc(var(--u) * 0.4);
+  font-size: calc(var(--u) * 1.9);
+  font-weight: 500;
+  opacity: .55;
+  white-space: nowrap;
+}
+.pc-num{
+  flex: 0 0 auto;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: calc(var(--u) * 3);
+  line-height: 1;
+  letter-spacing: .04em;
+  padding: calc(var(--u) * 0.7) calc(var(--u) * 1.3) calc(var(--u) * 0.45);
+  border-radius: 999px;
+  background: var(--t1-wash);
+  color: var(--t1-deep);
+}
+.pc-icon{
+  flex: 0 0 auto;
+  width: calc(var(--u) * 5.6);
+  height: calc(var(--u) * 5.6);
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--t1-light), var(--t1) 55%, var(--t1-deep));
+  box-shadow: 0 calc(var(--u) * 0.3) calc(var(--u) * 0.9) rgba(0,0,0,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pc-icon svg, .pc-icon .type-icon-fallback{
+  width: 62%;
+  height: 62%;
+  background: none !important;
+  font-size: calc(var(--u) * 2.6);
+}
+
+/* --- Art window --- */
+.pc-art{
+  position: relative;
+  flex: 0 0 calc(var(--u) * 40);
+  border-radius: calc(var(--u) * 1.8);
+  overflow: hidden;
+  border: calc(var(--u) * 0.35) solid rgba(255,255,255,0.95);
+  background: radial-gradient(circle at 50% 42%, var(--t1-glow) 0%, var(--t1-soft) 48%, var(--t2-soft) 100%);
+  background-clip: padding-box;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 calc(var(--u) * 0.5) calc(var(--u) * 1.4) rgba(0,0,0,0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pc-sheen{
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: linear-gradient(115deg, rgba(255,255,255,0) 28%, rgba(255,255,255,0.38) 44%, rgba(255,255,255,0) 58%);
+  pointer-events: none;
+}
+.pc-watermark{
+  position: absolute;
+  right: calc(var(--u) * -4);
+  bottom: calc(var(--u) * -4);
+  width: calc(var(--u) * 30);
+  height: calc(var(--u) * 30);
+  opacity: .16;
+}
+.pc-watermark svg, .pc-watermark .type-icon-fallback{
+  width: 100%; height: 100%;
+  background: none !important;
+  font-size: calc(var(--u) * 20);
+}
+.pc-floor{
+  position: absolute;
+  left: 22%; right: 22%;
+  bottom: calc(var(--u) * 3.2);
+  height: calc(var(--u) * 2.6);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.26) 0%, rgba(0,0,0,0) 70%);
+}
+.card.premium .sprite-wrap{
+  z-index: 1;
+  width: var(--pc-img);
+  height: var(--pc-img);
+}
+.pc-types{
+  position: absolute;
+  z-index: 2;
+  left: calc(var(--u) * 1.2);
+  top: calc(var(--u) * 1.2);
+  display: flex;
+  gap: calc(var(--u) * 0.6);
+}
+.pc-type{
+  font-size: calc(var(--u) * 1.6);
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: calc(var(--u) * 0.55) calc(var(--u) * 1.2);
+  border-radius: 999px;
+  box-shadow: 0 calc(var(--u) * 0.2) calc(var(--u) * 0.6) rgba(0,0,0,0.18);
+}
+
+/* --- Evolution chips --- */
+.pc-evo{
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--u) * 1);
+}
+.pc-evo-chip{
+  width: calc(var(--u) * 6.6);
+  height: calc(var(--u) * 6.6);
+  border-radius: 50%;
+  background: var(--t1-wash);
+  border: calc(var(--u) * 0.3) solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: .7;
+}
+.pc-evo-chip.current{
+  opacity: 1;
+  background: var(--card-box-bg);
+  border-color: var(--t1);
+  box-shadow: 0 calc(var(--u) * 0.3) calc(var(--u) * 0.9) rgba(0,0,0,0.16);
+}
+.pc-evo img.mini{ width: 88%; height: 88%; }
+.pc-evo img.mini.pixel{ image-rendering: pixelated; image-rendering: crisp-edges; }
+.pc-evo-arrow{
+  width: calc(var(--u) * 0.9);
+  height: calc(var(--u) * 0.9);
+  border-right: calc(var(--u) * 0.25) solid var(--t1);
+  border-top: calc(var(--u) * 0.25) solid var(--t1);
+  transform: rotate(45deg);
+  opacity: .5;
+}
+
+/* --- Facts / abilities / stats --- */
+.pc-label{
+  font-size: calc(var(--u) * 1.35);
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .5;
+}
+.pc-facts{
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(var(--u) * 0.8);
+}
+.pc-fact{
+  background: var(--t1-wash);
+  border-radius: calc(var(--u) * 1.2);
+  padding: calc(var(--u) * 0.8) calc(var(--u) * 1);
+  text-align: center;
+}
+.pc-fact .pc-val{
+  margin-top: calc(var(--u) * 0.25);
+  font-size: calc(var(--u) * 2.4);
+  font-weight: 700;
+  line-height: 1.1;
+}
+.pc-abil{
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: calc(var(--u) * 0.6);
+}
+.pc-abil .pc-label{ margin-right: calc(var(--u) * 0.4); }
+.pc-pill{
+  font-size: calc(var(--u) * 1.8);
+  font-weight: 600;
+  line-height: 1;
+  padding: calc(var(--u) * 0.55) calc(var(--u) * 1.1);
+  border-radius: 999px;
+  border: 1px solid var(--t1-line);
+  background: var(--card-box-bg);
+}
+.pc-pill.hidden{ border-style: dashed; opacity: .6; font-style: italic; }
+.pc-stats{
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+  column-gap: calc(var(--u) * 2);
+  row-gap: calc(var(--u) * 0.7);
+}
+.pc-stat{
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.8);
+  font-size: calc(var(--u) * 1.65);
+}
+.pc-stat .k{ width: calc(var(--u) * 4.2); font-weight: 600; letter-spacing: .08em; opacity: .55; }
+.pc-stat .n{ width: calc(var(--u) * 3.4); text-align: right; font-weight: 700; }
+.pc-bar{
+  flex: 1 1 auto;
+  height: calc(var(--u) * 1);
+  border-radius: 999px;
+  background: var(--t1-wash);
+  overflow: hidden;
+}
+.pc-bar i{
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--t1), var(--t2));
+}
+
+/* --- Flavor text + footer --- */
+.pc-desc{
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  font-size: calc(var(--u) * 2.15);
+  line-height: 1.45;
+  font-style: italic;
+  opacity: .78;
+  padding-left: calc(var(--u) * 1.2);
+  border-left: calc(var(--u) * 0.35) solid var(--t1);
+}
+.pc-foot{
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: calc(var(--u) * 1.35);
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .45;
+}
+.pc-foot .pc-rare{ color: #a87414; opacity: 1; }
+
+/* html2canvas draws blurred shadows as hard dark bands — drop them in PNG export */
+body[data-exporting="1"] .card.premium,
+body[data-exporting="1"] .pc-art,
+body[data-exporting="1"] .pc-icon,
+body[data-exporting="1"] .pc-type,
+body[data-exporting="1"] .pc-evo-chip{ box-shadow: none !important; }
+
+/* Manual text mode overrides */
+.card.premium[data-text="manual"] .pc-name{ font-size: var(--head-fz); }
+.card.premium[data-text="manual"] .pc-desc{ font-size: var(--desc-fz); }
+.card.premium[data-text="manual"] .pc-pill{ font-size: var(--meta-value-fz); }
+
+
+/* ╔══════════════════════════════════╗
    ║  14. CARD TYPOGRAPHY             ║
    ╚══════════════════════════════════╝ */
 
@@ -931,6 +1229,21 @@ body[data-exporting="1"] .stage{ transform: none !important; }
           <label>Gap <input id="cardGap" type="number" value="12" min="-60" max="120"></label>
           <label>Padding <input id="cardsPad" type="number" value="0" min="0" max="200"></label>
         </div>
+        <div class="row">
+          <label>Card design
+            <select id="cardDesign">
+              <option value="premium" selected>Premium</option>
+              <option value="classic">Classic</option>
+            </select>
+          </label>
+          <label id="pcStatsRow" style="flex-direction:row;gap:8px;align-items:center">
+            <div class="toggle">
+              <input id="pcStats" type="checkbox" checked>
+              <div class="toggle-track"></div>
+            </div>
+            Base stats
+          </label>
+        </div>
       </div>
     </details>
 
@@ -1127,6 +1440,11 @@ function syncTextModeUI(){
 }
 el('cardsPaging').addEventListener('input', () => { syncCardsPagingUI(); build(); });
 el('textMode').addEventListener('input', () => { syncTextModeUI(); build(); });
+function syncDesignUI(){
+  el('pcStatsRow').style.display = v('cardDesign') === 'premium' ? 'flex' : 'none';
+}
+el('cardDesign').addEventListener('input', syncDesignUI);
+syncDesignUI();
 syncCardsPagingUI();
 syncTextModeUI();
 
@@ -1281,7 +1599,10 @@ async function pokemonData(id){
   return {
     types: j.types.map(t => t.type.name),
     abilities: j.abilities.sort((a,b) => a.slot - b.slot)
-      .map(a => ({ name: titleName(a.ability.name), hidden: a.is_hidden }))
+      .map(a => ({ name: titleName(a.ability.name), hidden: a.is_hidden })),
+    stats: (j.stats || []).map(s => ({ name: s.stat.name, base: s.base_stat })),
+    height: j.height,
+    weight: j.weight
   };
 }
 function flavorFromRaw(raw, lang){
@@ -1641,9 +1962,172 @@ async function renderPoster(list){
 // ╔══════════════════════════════════╗
 // ║  9. RENDER: CARD + CARDS          ║
 // ╚══════════════════════════════════╝
+// Type symbol as an inline SVG filled with `fill` (circle background removed),
+// or a lettered fallback tile when the icon can't be fetched.
+async function typeIconNode(type, fill){
+  const svgText = await fetchTypeIcon(type);
+  if(svgText){
+    try{
+      const svgDoc = (new DOMParser()).parseFromString(svgText, 'image/svg+xml');
+      const svgEl = svgDoc.documentElement;
+      if(svgEl.tagName.toLowerCase() === 'svg' && !svgEl.querySelector('parsererror')){
+        // Color elements inline (no <style> tag — prevents cross-card leaking)
+        svgEl.querySelectorAll('circle').forEach(c => { c.style.display = 'none'; });
+        svgEl.querySelectorAll('path,polygon,polyline,ellipse,rect').forEach(s => { s.style.fill = fill; });
+        svgEl.removeAttribute('width'); svgEl.removeAttribute('height');
+        svgEl.style.cssText = 'display:block;flex-shrink:0;';
+        return document.importNode(svgEl, true);
+      }
+    }catch(_){}
+  }
+  const fb = document.createElement('div'); fb.className = 'type-icon-fallback';
+  fb.textContent = type[0].toUpperCase(); fb.style.background = fill;
+  return fb;
+}
+
+// Blend two #rrggbb colors; t = weight of b (0..1)
+function hexMix(a, b, t){
+  const p = h => [1,3,5].map(i => parseInt(h.slice(i, i+2), 16));
+  const A = p(a), B = p(b);
+  return '#' + A.map((x, i) => Math.round(x + (B[i] - x) * t).toString(16).padStart(2,'0')).join('');
+}
+function inkOn(hex){
+  const [r,g,b] = [1,3,5].map(i => parseInt(hex.slice(i, i+2), 16) / 255);
+  return (0.299*r + 0.587*g + 0.114*b) > 0.62 ? '#1b1b1b' : '#ffffff';
+}
+
+const GEN_ROMAN = {
+  'generation-i':'I','generation-ii':'II','generation-iii':'III','generation-iv':'IV','generation-v':'V',
+  'generation-vi':'VI','generation-vii':'VII','generation-viii':'VIII','generation-ix':'IX'
+};
+const STAT_LABELS = [
+  ['hp','HP'], ['attack','ATK'], ['defense','DEF'],
+  ['special-attack','SPA'], ['special-defense','SPD'], ['speed','SPE']
+];
+
+async function renderPremiumCard(pkId, sp, pd, style, lang, textMode){
+  const types = pd.types?.length ? pd.types : ['normal'];
+  const bg = /^#[0-9a-f]{6}$/i.test(v('cardBoxBg')) ? v('cardBoxBg') : '#ffffff';
+  const t1 = typeColor(types[0]);
+  const t2 = types[1] ? typeColor(types[1]) : hexMix(t1, '#000000', 0.22);
+  const raw = sp._raw || {};
+  const rare = !!(raw.is_legendary || raw.is_mythical);
+
+  const card = document.createElement('div');
+  card.className = 'card premium' + (rare ? ' rare' : '');
+  card.dataset.text = textMode;
+  const vars = {
+    '--t1': t1, '--t2': t2,
+    '--t1-light': hexMix(t1, '#ffffff', 0.45),
+    '--t1-deep':  hexMix(t1, '#000000', 0.38),
+    '--t1-glow':  hexMix(t1, '#ffffff', 0.86),
+    '--t1-soft':  hexMix(t1, '#ffffff', 0.55),
+    '--t2-soft':  hexMix(t2, '#ffffff', 0.35),
+    '--t1-wash':  hexMix(t1, bg, 0.86),
+    '--t1-line':  hexMix(t1, bg, 0.55),
+  };
+  for(const [k, val] of Object.entries(vars)) card.style.setProperty(k, val);
+
+  const body = document.createElement('div'); body.className = 'pc-body';
+
+  // Head: name + genus, dex number, type symbol
+  const genus = (raw.genera || []).find(g => g.language?.name === 'en')?.genus || '';
+  const head = document.createElement('div'); head.className = 'pc-head';
+  head.innerHTML = `<div class="pc-titles"><div class="pc-name"></div><div class="pc-genus"></div></div><div class="pc-num">No.${String(pkId).padStart(3,'0')}</div>`;
+  head.querySelector('.pc-name').textContent = localName(raw, lang);
+  head.querySelector('.pc-genus').textContent = genus || ' ';
+  const icon = document.createElement('div'); icon.className = 'pc-icon';
+  icon.appendChild(await typeIconNode(types[0], '#ffffff'));
+  head.appendChild(icon);
+
+  // Art window: gradient backdrop, type watermark, sheen, floor shadow, type chips
+  const art = document.createElement('div'); art.className = 'pc-art';
+  const mark = document.createElement('div'); mark.className = 'pc-watermark';
+  mark.appendChild(await typeIconNode(types[0], '#ffffff'));
+  const floor = document.createElement('div'); floor.className = 'pc-floor';
+  const sheen = document.createElement('div'); sheen.className = 'pc-sheen';
+  const chips = document.createElement('div'); chips.className = 'pc-types';
+  for(const t of types){
+    const c = document.createElement('span'); c.className = 'pc-type';
+    c.textContent = t;
+    c.style.background = typeColor(t);
+    c.style.color = inkOn(typeColor(t));
+    chips.appendChild(c);
+  }
+  art.append(mark, floor, spriteWrap(artURL(pkId, style), style), sheen, chips);
+
+  body.append(head, art);
+
+  // Evolution chips
+  const chainIds = await evoLine(sp.chain).catch(() => [pkId]);
+  if(chainIds.length > 1){
+    const evo = document.createElement('div'); evo.className = 'pc-evo';
+    chainIds.forEach((id, i) => {
+      const chip = document.createElement('div');
+      chip.className = 'pc-evo-chip' + (id === pkId ? ' current' : '');
+      const m = document.createElement('img');
+      m.className = 'mini' + (style === 'pixel' ? ' pixel' : '');
+      m.crossOrigin = 'anonymous';
+      m.decoding = 'async';
+      m.src = (style==='pixel')
+        ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+        : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`;
+      chip.appendChild(m);
+      evo.appendChild(chip);
+      if(i < chainIds.length - 1){
+        const a = document.createElement('div'); a.className = 'pc-evo-arrow';
+        evo.appendChild(a);
+      }
+    });
+    body.appendChild(evo);
+  }
+
+  // Facts: height, weight, region
+  const region = API_GEN_TO_REGION[sp.generation] || '—';
+  const facts = document.createElement('div'); facts.className = 'pc-facts';
+  const fact = (k, val) => `<div class="pc-fact"><div class="pc-label">${k}</div><div class="pc-val">${val}</div></div>`;
+  facts.innerHTML =
+    fact('Height', pd.height != null ? (pd.height / 10).toFixed(1) + ' m' : '—') +
+    fact('Weight', pd.weight != null ? (pd.weight / 10).toFixed(1) + ' kg' : '—') +
+    fact('Region', region.charAt(0) + region.slice(1).toLowerCase());
+  body.appendChild(facts);
+
+  // Abilities
+  const abil = document.createElement('div'); abil.className = 'pc-abil';
+  abil.innerHTML = `<span class="pc-label">Abilities</span>` + ((pd.abilities || []).slice(0,3).map(a =>
+    `<span class="pc-pill${a.hidden ? ' hidden' : ''}">${a.name}</span>`
+  ).join('') || '<span class="pc-pill">—</span>');
+  body.appendChild(abil);
+
+  // Base stats
+  if(el('pcStats').checked && pd.stats?.length){
+    const stats = document.createElement('div'); stats.className = 'pc-stats';
+    stats.innerHTML = STAT_LABELS.map(([key, label]) => {
+      const n = pd.stats.find(s => s.name === key)?.base ?? 0;
+      const pct = Math.min(100, Math.round(n / 180 * 100));
+      return `<div class="pc-stat"><span class="k">${label}</span><span class="n">${n}</span><span class="pc-bar"><i style="width:${pct}%"></i></span></div>`;
+    }).join('');
+    body.appendChild(stats);
+  }
+
+  // Flavor text + footer
+  const desc = document.createElement('div'); desc.className = 'pc-desc';
+  desc.textContent = sp._raw ? flavorFromRaw(sp._raw, lang) : '';
+  const foot = document.createElement('div'); foot.className = 'pc-foot';
+  const total = (pd.stats || []).reduce((s, x) => s + x.base, 0);
+  const rareTag = raw.is_mythical ? 'Mythical' : raw.is_legendary ? 'Legendary' : '';
+  foot.innerHTML = `<span>Gen ${GEN_ROMAN[sp.generation] || '?'} · Pokédex</span>` +
+    (rareTag ? `<span class="pc-rare">★ ${rareTag}</span>` : `<span>${total ? 'BST ' + total : ''}</span>`);
+  body.append(desc, foot);
+
+  card.appendChild(body);
+  return card;
+}
+
 async function renderCard(pkId, style, lang, textMode, showRegion=true){
   const sp = await speciesById(pkId);
   const pd = await pokemonData(pkId).catch(() => ({types:[], abilities:[]}));
+  if(v('cardDesign') === 'premium') return renderPremiumCard(pkId, sp, pd, style, lang, textMode);
 
   const card = document.createElement('div');
   card.className = 'card';
@@ -1700,28 +2184,7 @@ async function renderCard(pkId, style, lang, textMode, showRegion=true){
   const mainType = pd.types?.[0] || 'normal';
   const iconColor = typeColor(mainType);
   const iconWrap = document.createElement('div'); iconWrap.className = 'type-icon-wrap';
-  const svgText = await fetchTypeIcon(mainType);
-  let svgInserted = false;
-  if(svgText){
-    try{
-      const svgDoc = (new DOMParser()).parseFromString(svgText, 'image/svg+xml');
-      const svgEl = svgDoc.documentElement;
-      if(svgEl.tagName.toLowerCase() === 'svg' && !svgEl.querySelector('parsererror')){
-        // Color elements inline (no <style> tag — prevents cross-card leaking)
-        svgEl.querySelectorAll('circle').forEach(c => { c.style.display = 'none'; });
-        svgEl.querySelectorAll('path,polygon,polyline,ellipse,rect').forEach(s => { s.style.fill = iconColor; });
-        svgEl.removeAttribute('width'); svgEl.removeAttribute('height');
-        svgEl.style.cssText = 'display:block;flex-shrink:0;';
-        iconWrap.appendChild(document.importNode(svgEl, true));
-        svgInserted = true;
-      }
-    }catch(_){}
-  }
-  if(!svgInserted){
-    const fb = document.createElement('div'); fb.className = 'type-icon-fallback';
-    fb.textContent = mainType[0].toUpperCase(); fb.style.background = iconColor;
-    iconWrap.appendChild(fb);
-  }
+  iconWrap.appendChild(await typeIconNode(mainType, iconColor));
   const nameTag = document.createElement('div'); nameTag.className = 'type-name-tag';
   nameTag.textContent = mainType.toUpperCase();
   nameTag.style.color = iconColor;
@@ -1772,6 +2235,9 @@ async function renderCards(list){
 
   const imgSz = spriteSize(dims.w - cardPad*2, dims.h - cardPad*2, style);
   setVar('--img', imgSz+'px');
+  // Pixel sprites carry transparent padding, so they can be drawn larger than the window
+  const artBox = Math.floor(dims.h * 0.40 * (style === 'pixel' ? 1.15 : 0.86));
+  setVar('--pc-img', (style === 'pixel' ? spriteSize(artBox, artBox, style) : artBox) + 'px');
 
   const gens = new Set(list.map(x => x.generation).filter(Boolean));
 
@@ -1880,7 +2346,7 @@ async function build(){
   'posterShowCaption','posterShowTitle','posterBlueNoise','posterCustomTitle',
   'cardCols','cardRows','cardGap','cardsPad','cardsPaging','chainStart','chainCount',
   'cardPad','spriteY','miniSize','evoFill','evoStroke','evoBoxOn','evoBoxScale','evoBoxColor','evoBorderColor',
-  'textMode','cHead','cMeta','cDesc','metaGap','metaLabelSize','metaValueSize','cardBoxBg','cardBoxInk'
+  'textMode','cHead','cMeta','cDesc','metaGap','metaLabelSize','metaValueSize','cardBoxBg','cardBoxInk','cardDesign','pcStats'
 ].forEach(id => el(id).addEventListener('input', debouncedBuild));
 
 function syncPosterUI(){
